@@ -178,7 +178,7 @@ zoom = Vector2(4, 4)
 position_smoothing_enabled = true
 
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(-82, -83)
+position = Vector2(221, -88)
 texture = ExtResource("2_yqjtg")
 
 [node name="Tiles" type="TileMapLayer" parent="."]
