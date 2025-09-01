@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dyhruj4oatufd"]
+
+[node name="HeallthBar" type="Node2D"]
+
+[node name="Red" type="Polygon2D" parent="."]
+position = Vector2(8, 8)
+color = Color(1, 0.168627, 0.168627, 1)
+polygon = PackedVector2Array(-8, -8, -7.99999, -24, 72, -24, 72, -8)
+uv = PackedVector2Array(0, -1, 1, -25, 58, -21, 44, 15)
+
+[node name="Green" type="Polygon2D" parent="."]
+position = Vector2(-24, -24)
+color = Color(0.0784314, 1, 0.117647, 1)
+polygon = PackedVector2Array(24, 24, 24, 8, 88, 8, 88, 24)
