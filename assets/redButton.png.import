@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://caxqsggk42vig"
-path="res://.godot/imported/platforms.png-3869606db457611ed4193d705dc364e4.ctex"
+uid="uid://c5wc7jkloviv3"
+path="res://.godot/imported/redButton.png-e78ba1b1ccb08a72583f75b72e27fd51.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/platforms.png"
-dest_files=["res://.godot/imported/platforms.png-3869606db457611ed4193d705dc364e4.ctex"]
+source_file="res://assets/redButton.png"
+dest_files=["res://.godot/imported/redButton.png-e78ba1b1ccb08a72583f75b72e27fd51.ctex"]
 
 [params]
 

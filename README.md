@@ -1,3 +1,15 @@
-# First-game-jam
-Our first game jam!
-It will start on Septeber, 1st. But untill then we need to get used to the tools
+Game Design Document, or at least what this document is trying to be
+
+Idea: OSU, but instead of clicking buttons with mouse, we press them on the keyboard
+
+Buttons will appear on the screen with random letters, that need to be pressed.
+
+There will be an outline around the button that will move towards its center. You need to press the button before the outline connects with button's border.
+
+Features to be added:
+
+1. Line around a button, that will be getting closer and closer to the center of it.
+
+2. Implement random button generation
+
+3. Make a script so that points will be awarded if button is pressed in time
