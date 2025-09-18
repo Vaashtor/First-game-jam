@@ -5,12 +5,12 @@ var rng = RandomNumberGenerator.new()
 
 var current_target_letter = ""
 var current_key_instance = null
+var is_transition_in_progress = false  # Флаг для предотвращения конфликтов
 
 func _ready():
 	rng.randomize()
-	# Подключаем таймер (предполагается, что у вас есть узел Timer с именем "Timer")
 	$Timer.timeout.connect(_on_timer_timeout)
-	$Timer.start()  # Запускаем таймер
+	$Timer.start()
 	spawn_new_button()
 
 func get_random_letter():
@@ -18,67 +18,77 @@ func get_random_letter():
 	return letters[random_index]
 
 func spawn_new_button():
+	if is_transition_in_progress:
+		return
+	
+	is_transition_in_progress = true
+	
 	# Удаляем предыдущую кнопку, если она существует
 	if current_key_instance != null and is_instance_valid(current_key_instance):
 		current_key_instance.queue_free()
+		current_key_instance = null
 	
-	# Генерируем новую целевую букву (ОДИН раз!)
+	# Генерируем новую целевую букву
 	current_target_letter = get_random_letter()
 	
-	# Загружаем сохраненную сцену с клавишей
+	# Загружаем сцену с клавишей
 	var button_green_scene = preload("res://scenes/button_green.tscn")
-	
-	# Создаем экземпляр (копию) этой сцены
 	current_key_instance = button_green_scene.instantiate()
 	
-	# Добавляем этот экземпляр на сцену, чтобы он стал видимым
+	# Добавляем на сцену
 	add_child(current_key_instance)
 	
-	# Находим узел Label внутри экземпляра и задаем ему текст
+	# Устанавливаем текст
 	var label_node = current_key_instance.get_node("Texture/Text")
-	label_node.text = current_target_letter  # Используем ЦЕЛЕВУЮ букву!
+	label_node.text = current_target_letter
 	
-	# Случайная позиция клавиши
+	# Случайная позиция
 	current_key_instance.position = Vector2(
 		rng.randf_range(-640/2 + 64, 640/2 - 64),
 		rng.randf_range(-480/2 + 64, 480/2 - 64)
 	)
 	
 	print("Новая цель: ", current_target_letter)
+	is_transition_in_progress = false
+	$Timer.start()  # Перезапускаем таймер только после полного создания
 
 func kill_button_by_name():
+	if is_transition_in_progress:
+		return
+	
+	is_transition_in_progress = true
+	
 	if current_key_instance != null and is_instance_valid(current_key_instance):
-		# Можно добавить анимацию исчезновения
 		var tween = create_tween()
-		tween.tween_property(current_key_instance, "modulate:a", 0.0, 0.3)
+		tween.tween_property(current_key_instance, "modulate:a", 0.0, 0.2)
 		tween.tween_callback(_actually_remove_button)
 	else:
-		current_target_letter = ""
+		_actually_remove_button()
 
 func _actually_remove_button():
 	if current_key_instance != null:
 		current_key_instance.queue_free()
 		current_key_instance = null
 	current_target_letter = ""
+	is_transition_in_progress = false
 
 func _input(event):
-	# Обрабатываем только если есть целевая буква
-	if current_target_letter != "":
-		if event is InputEventKey and event.pressed and not event.echo:
-			# Преобразуем код клавиши в символ
-			var pressed_letter = char(event.keycode).to_lower()
-			
-			# Проверяем совпадение с целевой буквой
-			if pressed_letter == current_target_letter:
-				print("Верно! Нажата клавиша '", pressed_letter, "'")
-				$Timer.start()
-				kill_button_by_name()
-				# Сразу создаем новую цель
-				spawn_new_button()
-			else:
-				print("Неверно! Вы нажали '", pressed_letter, "', а нужно '", current_target_letter, "'")
+	if is_transition_in_progress or current_target_letter == "":
+		return
+	
+	if event is InputEventKey and event.pressed and not event.echo:
+		var pressed_letter = char(event.keycode).to_lower()
+		
+		if pressed_letter == current_target_letter:
+			print("Верно! Нажата клавиша '", pressed_letter, "'")
+			kill_button_by_name()
+			# Не создаем новую кнопку сразу - дождемся завершения анимации
+			await get_tree().create_timer(0.25).timeout  # Ждем завершения анимации
+			spawn_new_button()
 
 func _on_timer_timeout():
-	print("Время вышло для буквы: ", current_target_letter)
-	kill_button_by_name()
-	spawn_new_button()
+	if not is_transition_in_progress:
+		print("Время вышло для буквы: ", current_target_letter)
+		kill_button_by_name()
+		await get_tree().create_timer(0.25).timeout  # Ждем завершения анимации
+		spawn_new_button()
