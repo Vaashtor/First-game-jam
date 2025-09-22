@@ -1,21 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1hm23rj5dx2u"]
+[gd_scene load_steps=3 format=3 uid="uid://bht4ad82m5sfk"]
 
-[ext_resource type="Texture2D" uid="uid://c5wc7jkloviv3" path="res://assets/redButton.png" id="1_3mqkn"]
+[ext_resource type="Texture2D" uid="uid://qufn3u0n8hve" path="res://assets/greenButton.png" id="1_mi6dp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7y4y7"]
 font_size = 34
 
-[node name="Button_red" type="Node2D"]
+[node name="Button_green" type="Node2D"]
 
 [node name="Texture" type="Sprite2D" parent="."]
-texture = ExtResource("1_3mqkn")
+texture = ExtResource("1_mi6dp")
 
 [node name="Text" type="Label" parent="Texture"]
 offset_left = -23.0
 offset_top = -24.0
 offset_right = 23.0
 offset_bottom = 23.0
-text = "R"
+text = "G"
 label_settings = SubResource("LabelSettings_7y4y7")
 horizontal_alignment = 1
 vertical_alignment = 1
