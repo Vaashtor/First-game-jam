@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://d4k78r0eqo7do"]
+[gd_scene load_steps=6 format=3 uid="uid://d4k78r0eqo7do"]
 
+[ext_resource type="Script" uid="uid://c5kxpfg1vyf3q" path="res://scripts/game.gd" id="1_iywne"]
 [ext_resource type="PackedScene" uid="uid://bht4ad82m5sfk" path="res://scenes/button_green.tscn" id="1_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://chvg22pcgx1hu" path="res://assets/table.jpg" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://b1hm23rj5dx2u" path="res://scenes/button_red.tscn" id="3_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://cmg8gnqphd1g0" path="res://assets/book.png" id="5_p57ef"]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_iywne")
 
 [node name="Table" type="Sprite2D" parent="."]
 z_index = -10
@@ -19,3 +22,14 @@ position = Vector2(-172, -31)
 
 [node name="Button_red" parent="." instance=ExtResource("3_lnu2h")]
 position = Vector2(119, -83)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Book" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-2, 0)
+texture = ExtResource("5_p57ef")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
