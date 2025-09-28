@@ -10,6 +10,6 @@ Features to be added:
 
 1. Line around a button, that will be getting closer and closer to the center of it. # Scratch that, we're out of time 
 
-`2. Implement random button generation`
+~~2. Implement random button generation~~
 
-`3. Make a script so that points will be awarded if button is pressed in time`
+~~3. Make a script so that points will be awarded if button is pressed in time~~
