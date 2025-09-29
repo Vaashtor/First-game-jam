@@ -13,3 +13,7 @@ Features to be added:
 ~~2. Implement random button generation~~
 
 ~~3. Make a script so that points will be awarded if button is pressed in time~~
+
+4. Create small intro to the game, explaining story and game loop
+
+5. Make a functional menu
