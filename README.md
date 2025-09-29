@@ -8,13 +8,12 @@ There will be an outline around the button that will move towards its center. Yo
 
 Features to be added:
 
-1. Line around a button, that will be getting closer and closer to the center of it.
+1. Line around a button, that will be getting closer and closer to the center of it. # Scratch that, we're out of time 
 
-2. Implement random button generation
+~~2. Implement random button generation~~
 
-3. Add score system
+~~3. Make a script so that points will be awarded if button is pressed in time~~
 
 4. Create small intro to the game, explaining story and game loop
 
 5. Make a functional menu
-
