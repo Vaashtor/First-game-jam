@@ -1,0 +1,96 @@
+[gd_scene load_steps=7 format=3 uid="uid://codgxtc42dd2a"]
+
+[ext_resource type="Script" uid="uid://bbba6iem3mlsf" path="res://scripts/end_sequence.gd" id="1_np5sf"]
+[ext_resource type="Texture2D" uid="uid://chvg22pcgx1hu" path="res://assets/textures/table.jpg" id="1_ubx50"]
+[ext_resource type="FontFile" uid="uid://c6kom0q3r8vm1" path="res://assets/AmaticSC-Bold.ttf" id="3_kc2ne"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d0byu"]
+texture = ExtResource("1_ubx50")
+
+[sub_resource type="LabelSettings" id="LabelSettings_dbcmj"]
+font = ExtResource("3_kc2ne")
+font_size = 25
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_np5sf"]
+font = ExtResource("3_kc2ne")
+font_size = 40
+
+[node name="EndSequence" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_np5sf")
+
+[node name="BG" type="Panel" parent="."]
+z_index = -10
+offset_right = 640.0
+offset_bottom = 480.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_d0byu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Textbox" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 120.0
+offset_top = 300.0
+offset_right = 520.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DialogueLabel" type="Label" parent="Textbox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -50.0
+offset_right = 200.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "TESTING"
+label_settings = SubResource("LabelSettings_dbcmj")
+vertical_alignment = 1
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="ContinueButton" type="Button" parent="Textbox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 61.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_kc2ne")
+theme_override_font_sizes/font_size = 33
+text = "Continue"
+metadata/_edit_use_anchors_ = true
+
+[node name="CreditsLabel" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 480.0
+text = "Thanks for playing our game!
+Created by:
+Vaashtor,
+SoypGreen.
+
+Thanks to our friends who supported us <3"
+label_settings = SubResource("LabelSettings_np5sf")
+horizontal_alignment = 1
+vertical_alignment = 1

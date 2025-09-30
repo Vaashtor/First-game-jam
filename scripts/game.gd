@@ -4,16 +4,25 @@ var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
 var rng = RandomNumberGenerator.new()
 
 @onready var label_score: Label = $Label
+@onready var button_miss_sound: AudioStreamPlayer = $button_miss
+@onready var button_press_sound: AudioStreamPlayer = $button_press
+@onready var button_press_2: AudioStreamPlayer = $button_press2
 
-var score = 0
+
+var spawn_area = [-640/2,-480/2+480/4,640/2,480/2]
+var button_size = [128, 128]
+var score = []
+var buttons_spawned = 0
 
 var button_count = 2
 var current_target_letters = []
 var current_key_instances = null
-var is_transition_in_progress = false # Флаг для предотвращения конфликтов
+var is_transition_in_progress = false
 var button_scene = null
 
 func _ready():
+	for i in range(button_count):
+		score.append(0)
 	score_update()
 	rng.randomize()
 	$Timer.timeout.connect(_on_timer_timeout)
@@ -21,7 +30,7 @@ func _ready():
 	spawn_new_buttons()
 
 func score_update():
-	label_score.text = "Score = " + str(score)
+	label_score.text = "Red: " + str(score[0]) +";    Green: "+ str(score[1])+ "\nProgress: " + str(buttons_spawned*2) + "%"
 
 func get_random_letter():
 	var random_index = rng.randi_range(0, letters.size() - 1)
@@ -79,23 +88,23 @@ func spawn_new_buttons():
 		var texture_node = current_key_instances[i].get_node("Texture")
 		var new_texture = null
 		if i == 0:
-			new_texture = load("res://assets/redButton.png")
+			new_texture = load("res://assets/textures/redButton.png")
 		else:
-			new_texture = load("res://assets/greenButton.png")
+			new_texture = load("res://assets/textures/greenButton.png")
 		texture_node.texture = new_texture
 		
-		# Устанавливаем текст
+		# Set the text
 		var label_node = current_key_instances[i].get_node("Texture/Text")
 		label_node.text = current_target_letter.to_upper() #make letter capital
 		
 		# get different random position
-		var button_size = [64, 64]
 		var x = 0
 		var y = 0
 		while true:
 			# generate random coordinates
-			x = rng.randf_range(-640 / 2 + button_size[0], 640 / 2 - button_size[0])
-			y = rng.randf_range(-480 / 2 + button_size[1], 480 / 2 - button_size[1])
+			
+			x = rng.randf_range(spawn_area[0] + button_size[0], spawn_area[2] - button_size[0])
+			y = rng.randf_range(spawn_area[1] + button_size[1], spawn_area[3] - button_size[1])
 			var c = 0
 			if i ==0:
 				break
@@ -115,9 +124,9 @@ func spawn_new_buttons():
 		positions.append([x,y])
 	
 	#when all buttons are generated
-	print("Новая цель: ", current_target_letters[0], ", ", current_target_letters[1])
+	print("New targets: ", current_target_letters[0], ", ", current_target_letters[1])
 	is_transition_in_progress = false
-	$Timer.start() # Перезапускаем таймер только после полного создания
+	$Timer.start() #reset timer
 
 func kill_button():
 	if is_transition_in_progress:
@@ -143,28 +152,49 @@ func _actually_remove_button():
 	is_transition_in_progress = false
 
 func end_sequence():
+	buttons_spawned += 1
 	score_update()
 	kill_button()
-	await get_tree().create_timer(0.25).timeout # Ждем завершения анимации
+	await get_tree().create_timer(0.25).timeout # wait till animation is over
 	spawn_new_buttons()
+	if buttons_spawned == 50:
+		var max = 0
+		var max_i = null
+		for i in range(len(score)):
+			if score[i] > max and score[i] > 20:
+				max = score[i]
+				max_i = i
+		if max_i != null:
+			if max_i == 0:
+				Global.result = "Red"
+			else:
+				Global.result = "Green"
+		else:
+				Global.result = "Fail"
+		get_tree().change_scene_to_file("res://scenes/end_sequence.tscn")
 
 func _input(event):
 	if is_transition_in_progress or current_target_letters == []:
 		return
 	
 	if event is InputEventKey and event.pressed and not event.echo:
-		var pressed_letter = char(event.keycode).to_lower()
+		var pressed_key = char(event.keycode).to_lower()
+		var temp = true
 		
 		for i in range(len(current_target_letters)):
-			if pressed_letter == current_target_letters[i]:
-				print("Верно! Нажата клавиша '", pressed_letter, "'")
-				if(i == 1):
-					score += 1
+			if pressed_key == current_target_letters[i]:
+				temp = false
+				score[i] += 1
+				if i == 0:
+					button_press_sound.play()
 				else:
-					score -= 1
+					button_press_2.play()
 				end_sequence()
+		if temp and pressed_key in letters:
+			button_miss_sound.play()
+			end_sequence()
 
 func _on_timer_timeout():
 	if not is_transition_in_progress:
-		print("Время вышло")
+		button_miss_sound.play()
 		end_sequence()

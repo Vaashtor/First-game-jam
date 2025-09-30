@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="Our_game"
-run/main_scene="uid://d4k78r0eqo7do"
+run/main_scene="uid://dpifdkjj6n8qd"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://scripts/Global.gd"
+BackgroundMusic="*res://scenes/BackgroundMusic.tscn"
 
 [display]
 

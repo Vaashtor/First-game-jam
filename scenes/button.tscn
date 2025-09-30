@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bht4ad82m5sfk"]
 
-[ext_resource type="Texture2D" uid="uid://qufn3u0n8hve" path="res://assets/greenButton.png" id="1_mi6dp"]
+[ext_resource type="Texture2D" uid="uid://qufn3u0n8hve" path="res://assets/textures/greenButton.png" id="1_mi6dp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7y4y7"]
 font_size = 34

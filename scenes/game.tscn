@@ -1,13 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://d4k78r0eqo7do"]
+[gd_scene load_steps=12 format=3 uid="uid://d4k78r0eqo7do"]
 
 [ext_resource type="Script" uid="uid://c5kxpfg1vyf3q" path="res://scripts/game.gd" id="1_iywne"]
-[ext_resource type="Texture2D" uid="uid://chvg22pcgx1hu" path="res://assets/table.jpg" id="2_lnu2h"]
-[ext_resource type="Texture2D" uid="uid://dsxkf0yjt2yev" path="res://assets/pen.png" id="4_gee14"]
-[ext_resource type="Texture2D" uid="uid://n1cy4kcjbof1" path="res://assets/cap.png" id="5_0tnpc"]
-[ext_resource type="Texture2D" uid="uid://cmg8gnqphd1g0" path="res://assets/book.png" id="5_p57ef"]
-[ext_resource type="Texture2D" uid="uid://2cp5aclx3sxc" path="res://assets/paper.png" id="6_vtaks"]
-[ext_resource type="Texture2D" uid="uid://c4g0q1ixv4h8x" path="res://assets/phone.png" id="7_kvpfn"]
-[ext_resource type="Texture2D" uid="uid://c84ksjly1vlcn" path="res://assets/plant.png" id="8_dinhu"]
+[ext_resource type="Texture2D" uid="uid://chvg22pcgx1hu" path="res://assets/textures/table.jpg" id="2_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://dsxkf0yjt2yev" path="res://assets/textures/pen.png" id="4_gee14"]
+[ext_resource type="Texture2D" uid="uid://n1cy4kcjbof1" path="res://assets/textures/cap.png" id="5_0tnpc"]
+[ext_resource type="Texture2D" uid="uid://cmg8gnqphd1g0" path="res://assets/textures/book.png" id="5_p57ef"]
+[ext_resource type="Texture2D" uid="uid://2cp5aclx3sxc" path="res://assets/textures/paper.png" id="6_vtaks"]
+[ext_resource type="Texture2D" uid="uid://c4g0q1ixv4h8x" path="res://assets/textures/phone.png" id="7_kvpfn"]
+[ext_resource type="Texture2D" uid="uid://c84ksjly1vlcn" path="res://assets/textures/plant.png" id="8_dinhu"]
+[ext_resource type="FontFile" uid="uid://c6kom0q3r8vm1" path="res://assets/AmaticSC-Bold.ttf" id="9_0tnpc"]
+[ext_resource type="AudioStream" uid="uid://ctei3ah0av3y3" path="res://assets/sounds/ButtonMiss.wav" id="10_kvpfn"]
+[ext_resource type="AudioStream" uid="uid://brlm34w5x6f0j" path="res://assets/sounds/ButtonTap.wav" id="11_dinhu"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_iywne")
@@ -22,6 +25,10 @@ autostart = true
 
 [node name="background" type="Node2D" parent="."]
 z_index = -5
+
+[node name="Table" type="Sprite2D" parent="background"]
+z_index = -10
+texture = ExtResource("2_lnu2h")
 
 [node name="Book" type="Sprite2D" parent="background"]
 z_index = -5
@@ -57,17 +64,30 @@ texture = ExtResource("7_kvpfn")
 [node name="plant" type="Sprite2D" parent="background"]
 z_index = -5
 position = Vector2(-229, -139)
+rotation = 0.487559
 texture = ExtResource("8_dinhu")
-
-[node name="Table" type="Sprite2D" parent="background"]
-z_index = -10
-texture = ExtResource("2_lnu2h")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -105.0
 offset_top = -215.0
 offset_right = 138.0
 offset_bottom = -182.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_0tnpc")
+theme_override_font_sizes/font_size = 28
 text = "Score:"
+
+[node name="button_press" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_dinhu")
+volume_db = 10.0
+pitch_scale = 1.1
+
+[node name="button_press2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_dinhu")
+volume_db = 10.0
+
+[node name="button_miss" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_kvpfn")
+volume_db = 10.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

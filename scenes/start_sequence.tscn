@@ -1,0 +1,90 @@
+[gd_scene load_steps=7 format=3 uid="uid://bgg3lp8eljpmy"]
+
+[ext_resource type="Script" uid="uid://sctetqmkeu4v" path="res://scripts/start_sequence.gd" id="1_08ag5"]
+[ext_resource type="Texture2D" uid="uid://chvg22pcgx1hu" path="res://assets/textures/table.jpg" id="2_ts35i"]
+[ext_resource type="Texture2D" uid="uid://c84ksjly1vlcn" path="res://assets/textures/plant.png" id="3_mad55"]
+[ext_resource type="FontFile" uid="uid://c6kom0q3r8vm1" path="res://assets/AmaticSC-Bold.ttf" id="4_08ag5"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8ln24"]
+texture = ExtResource("2_ts35i")
+
+[sub_resource type="LabelSettings" id="LabelSettings_08ag5"]
+font = ExtResource("4_08ag5")
+font_size = 25
+font_color = Color(0, 0, 0, 1)
+
+[node name="Main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_08ag5")
+
+[node name="BG" type="Panel" parent="."]
+z_index = -10
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 480.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_8ln24")
+
+[node name="plant" type="Sprite2D" parent="."]
+z_index = -5
+position = Vector2(91, 101)
+rotation = 0.487559
+texture = ExtResource("3_mad55")
+
+[node name="Textbox" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.729
+anchor_right = 0.5
+anchor_bottom = 0.729
+offset_left = -200.0
+offset_top = -49.92
+offset_right = 200.0
+offset_bottom = 50.08
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="DialogueLabel" type="Label" parent="Textbox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -50.0
+offset_right = 200.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "TESTING"
+label_settings = SubResource("LabelSettings_08ag5")
+vertical_alignment = 1
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="ContinueButton" type="Button" parent="Textbox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 61.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("4_08ag5")
+theme_override_font_sizes/font_size = 33
+text = "Continue"
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qufn3u0n8hve"
-path="res://.godot/imported/greenButton.png-6e83c53511975c12841a14849d8b06b1.ctex"
+uid="uid://n1cy4kcjbof1"
+path="res://.godot/imported/cap.png-f2d6ba8dcd82bf69f0f5e39dffed83e8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/greenButton.png"
-dest_files=["res://.godot/imported/greenButton.png-6e83c53511975c12841a14849d8b06b1.ctex"]
+source_file="res://assets/textures/cap.png"
+dest_files=["res://.godot/imported/cap.png-f2d6ba8dcd82bf69f0f5e39dffed83e8.ctex"]
 
 [params]
 

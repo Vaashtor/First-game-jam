@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://43r8wcnlwn6j"
-path="res://.godot/imported/eracer.png-8871f32d090586eda7c1f2f861cd7440.ctex"
+uid="uid://c84ksjly1vlcn"
+path="res://.godot/imported/plant.png-bb43d92d4e9aa09a3e56801e52e6502e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/eracer.png"
-dest_files=["res://.godot/imported/eracer.png-8871f32d090586eda7c1f2f861cd7440.ctex"]
+source_file="res://assets/textures/plant.png"
+dest_files=["res://.godot/imported/plant.png-bb43d92d4e9aa09a3e56801e52e6502e.ctex"]
 
 [params]
 
